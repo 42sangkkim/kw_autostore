@@ -4,7 +4,7 @@
   <name>autostore</name>
   <version>0.0.0</version>
   <description>TODO: Package description</description>
-  <maintainer email="madlogic365@gmail.com">sangkkim</maintainer>
+  <maintainer email="madlogic365@gmail.com">Kim Sangkyeong</maintainer>
   <license>TODO: License declaration</license>
 
   <test_depend>ament_copyright</test_depend>
