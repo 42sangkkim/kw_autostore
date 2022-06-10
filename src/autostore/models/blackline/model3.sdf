@@ -1,0 +1,418 @@
+<?xml version="1.0"?>
+
+<sdf version="1.4">
+	<model name="my_robot">
+
+		<link name="main_frame">
+			<pose> 0 0 0.22 0 0 0 </pose>
+			<!-- frame visual -->
+			<visual name="frame_top_visual">
+				<pose> 0 0 0.6 0 0 0 </pose>
+				<geometry>
+					<box>
+						<size> 0.96 0.96 0.02 </size>
+					</box>
+				</geometry>
+			</visual>
+			<visual name="frame_front_visual">
+				<pose> 0.47 0 0.3 0 0 0 </pose>
+				<geometry>
+					<box>
+						<size> 0.02 0.96 0.6 </size>
+					</box>
+				</geometry>
+			</visual>
+			<visual name="frame_rear_visual">
+				<pose> -0.47 0 0.3 0 0 0 </pose>
+				<geometry>
+					<box>
+						<size> 0.02 0.96 0.6 </size>
+					</box>
+				</geometry>
+			</visual>
+			<visual name="frame_left_visual">
+				<pose> 0 0.47 0.3 0 0 0 </pose>
+				<geometry>
+					<box>
+						<size> 0.96 0.02 0.6 </size>
+					</box>
+				</geometry>
+			</visual>
+			<visual name="frame_right_visual">
+				<pose> 0 -0.47 0.3 0 0 0 </pose>
+				<geometry>
+					<box>
+						<size> 0.96 0.02 0.6 </size>
+					</box>
+				</geometry>
+			</visual>
+
+			<!-- frame collision -->
+			<collision name="frame_top_collision">
+				<pose> 0 0 0.6 0 0 0 </pose>
+				<geometry>
+					<box>
+						<size> 0.96 0.96 0.02 </size>
+					</box>
+				</geometry>
+			</collision>
+			<collision name="frame_front_collision">
+				<pose> 0.47 0 0.3 0 0 0 </pose>
+				<geometry>
+					<box>
+						<size> 0.02 0.96 0.6 </size>
+					</box>
+				</geometry>
+			</collision>
+			<collision name="frame_rear_collision">
+				<pose> -0.47 0 0.3 0 0 0 </pose>
+				<geometry>
+					<box>
+						<size> 0.02 0.96 0.6 </size>
+					</box>
+				</geometry>
+			</collision>
+			<collision name="frame_left_collision">
+				<pose> 0 0.47 0.3 0 0 0 </pose>
+				<geometry>
+					<box>
+						<size> 0.96 0.02 0.6 </size>
+					</box>
+				</geometry>
+			</collision>
+			<collision name="frame_right_collision">
+				<pose> 0 -0.47 0.3 0 0 0 </pose>
+				<geometry>
+					<box>
+						<size> 0.96 0.02 0.6 </size>
+					</box>
+				</geometry>
+			</collision>
+		</link>
+
+		<!-- wheel lf -->
+
+		<link name="wheel_frame_lf">
+			<pose> 0.5 0.5 0.31 0 0 0 </pose>
+			<visual name="wheel_frame_visual">
+				<geometry>
+					<cylinder>
+						<radius> 0.02828 </radius>
+						<length> 0.22 </length>
+					</cylinder>
+				</geometry>
+			</visual>
+			<collision name="wheel_frame_collision">
+				<geometry>
+					<cylinder>
+						<radius> 0.02828 </radius>
+						<length> 0.22 </length>
+					</cylinder>
+				</geometry>
+			</collision>
+			<visual name="wheel_cap_visaul">
+				<pose> 0 0 0.11 0 0 0 </pose>
+				<geometry>
+					<sphere>
+						<radius> 0.02828 </radius>
+					</sphere>
+				</geometry>
+			</visual>
+			<collision name="wheel_cap_collision">
+				<pose> 0 0 0.11 0 0 0 </pose>
+				<geometry>
+					<sphere>
+						<radius> 0.02828 </radius>
+					</sphere>
+				</geometry>
+			</collision>
+		</link>
+		<joint name="rotate_lf" type="revolute">
+			<parent> main_frame </parent>
+			<child> wheel_frame_lf </child>
+			<axis>
+				<xyz> 0 0 1 </xyz>
+				<dynamics>
+					<damping> 100 </damping>
+					<friction> 200 </friction>
+				</dynamics>
+				<limit>
+					<lower> 0.0 </lower>
+					<upper> 1.5707 </upper>
+				</limit>
+			</axis>
+		</joint>
+		<link name="wheel_lf">
+			<pose> 0.5 0.5 0.1 0 0 0 </pose>
+			<visual name="wheel_visual">
+				<pose> 0 0 0 1.5707 0 0 </pose>
+				<geometry>
+					<cylinder>
+						<radius> 0.1 </radius>
+						<length> 0.03 </length>
+					</cylinder>
+				</geometry>
+			</visual>
+			<collision name="wheel_collision">
+				<pose> 0 0 0 1.5707 0 0 </pose>
+				<geometry>
+					<cylinder>
+						<radius> 0.1 </radius>
+						<length> 0.03 </length>
+					</cylinder>
+				</geometry>
+			</collision>
+		</link>
+		<joint name="drive_lf" type="revolute">
+			<parent> wheel_frame_lf </parent>
+			<child> wheel_lf </child>
+			<axis>
+				<xyz> 0 1 0 </xyz>
+			</axis>
+		</joint>
+
+		<!-- wheel lr -->
+		
+		<link name="wheel_frame_lr">
+			<pose> -0.5 0.5 0.31 0 0 0 </pose>
+			<visual name="wheel_frame_visual">
+				<geometry>
+					<cylinder>
+						<radius> 0.02828 </radius>
+						<length> 0.22 </length>
+					</cylinder>
+				</geometry>
+			</visual>
+			<collision name="wheel_frame_collision">
+				<geometry>
+					<cylinder>
+						<radius> 0.02828 </radius>
+						<length> 0.22 </length>
+					</cylinder>
+				</geometry>
+			</collision>
+			<visual name="wheel_cap_visaul">
+				<pose> 0 0 0.11 0 0 0 </pose>
+				<geometry>
+					<sphere>
+						<radius> 0.02828 </radius>
+					</sphere>
+				</geometry>
+			</visual>
+			<collision name="wheel_cap_collision">
+				<pose> 0 0 0.11 0 0 0 </pose>
+				<geometry>
+					<sphere>
+						<radius> 0.02828 </radius>
+					</sphere>
+				</geometry>
+			</collision>
+		</link>
+		<joint name="rotate_lr" type="revolute">
+			<parent> main_frame </parent>
+			<child> wheel_frame_lr </child>
+			<axis>
+				<xyz> 0 0 1 </xyz>
+				<dynamics>
+					<damping> 100 </damping>
+					<friction> 200 </friction>
+				</dynamics>
+				<limit>
+					<lower> 0.0 </lower>
+					<upper> 1.5707 </upper>
+				</limit>
+			</axis>
+		</joint>
+		<link name="wheel_lr">
+			<pose> -0.5 0.5 0.1 0 0 0 </pose>
+			<visual name="wheel_visual">
+				<pose> 0 0 0 1.5707 0 0 </pose>
+				<geometry>
+					<cylinder>
+						<radius> 0.1 </radius>
+						<length> 0.03 </length>
+					</cylinder>
+				</geometry>
+			</visual>
+			<collision name="wheel_collision">
+				<pose> 0 0 0 1.5707 0 0 </pose>
+				<geometry>
+					<cylinder>
+						<radius> 0.1 </radius>
+						<length> 0.03 </length>
+					</cylinder>
+				</geometry>
+			</collision>
+		</link>
+		<joint name="drive_lr" type="revolute">
+			<parent> wheel_frame_lr </parent>
+			<child> wheel_lr </child>
+			<axis>
+				<xyz> 0 1 0 </xyz>
+			</axis>
+		</joint>
+
+		<!-- wheel rf -->
+		
+		<link name="wheel_frame_rf">
+			<pose> 0.5 -0.5 0.31 0 0 0 </pose>
+			<visual name="wheel_frame_visual">
+				<geometry>
+					<cylinder>
+						<radius> 0.02828 </radius>
+						<length> 0.22 </length>
+					</cylinder>
+				</geometry>
+			</visual>
+			<collision name="wheel_frame_collision">
+				<geometry>
+					<cylinder>
+						<radius> 0.02828 </radius>
+						<length> 0.22 </length>
+					</cylinder>
+				</geometry>
+			</collision>
+			<visual name="wheel_cap_visaul">
+				<pose> 0 0 0.11 0 0 0 </pose>
+				<geometry>
+					<sphere>
+						<radius> 0.02828 </radius>
+					</sphere>
+				</geometry>
+			</visual>
+			<collision name="wheel_cap_collision">
+				<pose> 0 0 0.11 0 0 0 </pose>
+				<geometry>
+					<sphere>
+						<radius> 0.02828 </radius>
+					</sphere>
+				</geometry>
+			</collision>
+		</link>
+		<joint name="rotate_rf" type="revolute">
+			<parent> main_frame </parent>
+			<child> wheel_frame_rf </child>
+			<axis>
+				<xyz> 0 0 1 </xyz>
+				<dynamics>
+					<damping> 100 </damping>
+					<friction> 200 </friction>
+				</dynamics>
+				<limit>
+					<lower> 0.0 </lower>
+					<upper> 1.5707 </upper>
+				</limit>
+			</axis>
+		</joint>
+		<link name="wheel_rf">
+			<pose> 0.5 -0.5 0.1 0 0 0 </pose>
+			<visual name="wheel_visual">
+				<pose> 0 0 0 1.5707 0 0 </pose>
+				<geometry>
+					<cylinder>
+						<radius> 0.1 </radius>
+						<length> 0.03 </length>
+					</cylinder>
+				</geometry>
+			</visual>
+			<collision name="wheel_collision">
+				<pose> 0 0 0 1.5707 0 0 </pose>
+				<geometry>
+					<cylinder>
+						<radius> 0.1 </radius>
+						<length> 0.03 </length>
+					</cylinder>
+				</geometry>
+			</collision>
+		</link>
+		<joint name="drive_rf" type="revolute">
+			<parent> wheel_frame_rf </parent>
+			<child> wheel_rf </child>
+			<axis>
+				<xyz> 0 1 0 </xyz>
+			</axis>
+		</joint>
+
+		<!-- wheel rr -->
+		
+		<link name="wheel_frame_rr">
+			<pose> -0.5 -0.5 0.31 0 0 0 </pose>
+			<visual name="wheel_frame_visual">
+				<geometry>
+					<cylinder>
+						<radius> 0.02828 </radius>
+						<length> 0.22 </length>
+					</cylinder>
+				</geometry>
+			</visual>
+			<collision name="wheel_frame_collision">
+				<geometry>
+					<cylinder>
+						<radius> 0.02828 </radius>
+						<length> 0.22 </length>
+					</cylinder>
+				</geometry>
+			</collision>
+			<visual name="wheel_cap_visaul">
+				<pose> 0 0 0.11 0 0 0 </pose>
+				<geometry>
+					<sphere>
+						<radius> 0.02828 </radius>
+					</sphere>
+				</geometry>
+			</visual>
+			<collision name="wheel_cap_collision">
+				<pose> 0 0 0.11 0 0 0 </pose>
+				<geometry>
+					<sphere>
+						<radius> 0.02828 </radius>
+					</sphere>
+				</geometry>
+			</collision>
+		</link>
+		<joint name="rotate_rr" type="revolute">
+			<parent> main_frame </parent>
+			<child> wheel_frame_rr </child>
+			<axis>
+				<xyz> 0 0 1 </xyz>
+				<dynamics>
+					<damping> 100 </damping>
+					<friction> 200 </friction>
+				</dynamics>
+				<limit>
+					<lower> 0.0 </lower>
+					<upper> 1.5707 </upper>
+				</limit>
+			</axis>
+		</joint>
+		<link name="wheel_rr">
+			<pose> -0.5 -0.5 0.1 0 0 0 </pose>
+			<visual name="wheel_visual">
+				<pose> 0 0 0 1.5707 0 0 </pose>
+				<geometry>
+					<cylinder>
+						<radius> 0.1 </radius>
+						<length> 0.03 </length>
+					</cylinder>
+				</geometry>
+			</visual>
+			<collision name="wheel_collision">
+				<pose> 0 0 0 1.5707 0 0 </pose>
+				<geometry>
+					<cylinder>
+						<radius> 0.1 </radius>
+						<length> 0.03 </length>
+					</cylinder>
+				</geometry>
+			</collision>
+		</link>
+		<joint name="drive_rr" type="revolute">
+			<parent> wheel_frame_rr </parent>
+			<child> wheel_rr </child>
+			<axis>
+				<xyz> 0 1 0 </xyz>
+			</axis>
+		</joint>
+
+	</model>
+</sdf>

@@ -1,0 +1,540 @@
+<?xml version="1.0"?>
+
+<sdf version="1.4">
+	<model name="blackline">
+		<link name="main_frame">
+
+			<!-- frame visaul -->
+			<visual name="frame_top">
+				<pose> 0 0 0.7 0 0 0 </pose>
+				<geometry>
+					<box>
+						<size> 0.96 0.96 0.02 </size>
+					</box>
+				</geometry>
+			</visual>
+			<visual name="frame_front">
+				<pose> 0.47 0 0.45 0 0 0 </pose>
+				<geometry>
+					<box>
+						<size> 0.02 0.96 0.5 </size>
+					</box>
+				</geometry>
+			</visual>
+			<visual name="frame_rear">
+				<pose> -0.47 0 0.45 0 0 0 </pose>
+				<geometry>
+					<box>
+						<size> 0.02 0.96 0.5 </size>
+					</box>
+				</geometry>
+			</visual>
+			<visual name="frame_left">
+				<pose> 0 0.47 0.45 0 0 0 </pose>
+				<geometry>
+					<box>
+						<size> 0.96 0.02 0.5 </size>
+					</box>
+				</geometry>
+			</visual>
+			<visual name="frame_right">
+				<pose> 0 -0.47 0.45 0 0 0 </pose>
+				<geometry>
+					<box>
+						<size> 0.96 0.02 0.5 </size>
+					</box>
+				</geometry>
+			</visual>
+
+			<!-- frame collision -->
+			<collision name="collision_top">
+				<pose> 0 0 0.7 0 0 0 </pose>
+				<geometry>
+					<box>
+						<size> 0.96 0.96 0.02 </size>
+					</box>
+				</geometry>
+			</collision>
+			<collision name="collision_front">
+				<pose> 0.47 0 0.45 0 0 0 </pose>
+				<geometry>
+					<box>
+						<size> 0.02 0.96 0.5 </size>
+					</box>
+				</geometry>
+			</collision>
+			<collision name="collision_rear">
+				<pose> -0.47 0 0.45 0 0 0 </pose>
+				<geometry>
+					<box>
+						<size> 0.02 0.96 0.5 </size>
+					</box>
+				</geometry>
+			</collision>
+			<collision name="collision_left">
+				<pose> 0 0.47 0.45 0 0 0 </pose>
+				<geometry>
+					<box>
+						<size> 0.96 0.02 0.5 </size>
+					</box>
+				</geometry>
+			</collision>
+			<collision name="collision_right">
+				<pose> 0 -0.47 0.45 0 0 0 </pose>
+				<geometry>
+					<box>
+						<size> 0.96 0.02 0.5 </size>
+					</box>
+				</geometry>
+			</collision>
+
+			<!-- caster collision -->
+			<collision name="caster1">
+				<pose> 0.47 0.47 0.01 0 0 0 </pose>
+				<geometry>
+					<sphere>
+						<radius> 0.01 </radius>
+					</sphere>
+				</geometry>
+			</collision>
+			<collision name="caster2">
+				<pose> 0.47 -0.47 0.01 0 0 0 </pose>
+				<geometry>
+					<sphere>
+						<radius> 0.01 </radius>
+					</sphere>
+				</geometry>
+			</collision>
+			<collision name="caster3">
+				<pose> -0.47 0.47 0.01 0 0 0 </pose>
+				<geometry>
+					<sphere>
+						<radius> 0.01 </radius>
+					</sphere>
+				</geometry>
+			</collision>
+			<collision name="cater4">
+				<pose> -0.47 -0.47 0.01 0 0 0 </pose>
+				<geometry>
+					<sphere>
+						<radius> 0.01 </radius>
+					</sphere>
+				</geometry>
+			</collision>
+		
+		</link>
+
+		<link name="x_axis_frame">
+			<pose> 0 0 0.1 0 0 0 </pose>
+			<visual name="x_beam_left_visual">
+				<pose> 0 0.47 0 0 0 0 </pose>
+				<geometry>
+					<box>
+						<size> 0.72 0.02 0.06 </size>
+					</box>
+				</geometry>
+			</visual>
+			<visual name="x_beam_right_visual">
+				<pose> 0 -0.47 0 0 0 0 </pose>
+				<geometry>
+					<box>
+						<size> 0.72 0.02 0.06 </size>
+					</box>
+				</geometry>
+			</visual>
+
+			<collision name="x_beam_left_collision">
+				<pose> 0 0.47 0 0 0 0 </pose>
+				<geometry>
+					<box>
+						<size> 0.72 0.02 0.06 </size>
+					</box>
+				</geometry>
+			</collision>
+			<collision name="x_beam_right_collision">
+				<pose> 0 -0.47 0 0 0 0 </pose>
+				<geometry>
+					<box>
+						<size> 0.72 0.02 0.06 </size>
+					</box>
+				</geometry>
+			</collision>
+		</link>
+
+		<joint name="x_axis_lift" type="prismatic">
+			<parent> main_frame </parent>
+			<child> x_axis_frame </child>
+			<axis>
+				<xyz> 0 0 1 </xyz>
+				<dynamics>
+					<damping> 100 </damping>
+					<friction> 200 </friction>
+				</dynamics>
+				<limit>
+					<upper> 0.6 </upper>
+					<lower> 0.0 </lower>
+				</limit>
+			</axis>
+		</joint>
+ 
+		<link name="x_wheel_fl">
+			<pose> 0.35 0.5 0.1 0 0 0 </pose>
+			<visual name="left_wheel_visual">
+				<pose> 0 0 0 1.5707 0 0 </pose>
+				<geometry>
+					<cylinder>
+						<radius> 0.1 </radius>
+						<length> 0.04 </length>
+					</cylinder>
+				</geometry>
+			</visual>
+			<collision name="left_wheel_collision">
+				<pose> 0 0 0 1.5707 0 0 </pose>
+				<geometry>
+					<cylinder>
+						<radius> 0.1 </radius>
+						<length> 0.04 </length>
+					</cylinder>
+				</geometry>
+			</collision>
+		</link>
+
+		<link name="x_wheel_fr">
+			<pose> 0.35 -0.5 0.1 0 0 0 </pose>
+			<visual name="right_wheel_visual">
+				<pose> 0 0 0 1.5707 0 0 </pose>
+				<geometry>
+					<cylinder>
+						<radius> 0.1 </radius>
+						<length> 0.04 </length>
+					</cylinder>
+				</geometry>
+			</visual>
+			<collision name="right_wheel_collision">
+				<pose> 0 0 0 1.5707 0 0 </pose>
+				<geometry>
+					<cylinder>
+						<radius> 0.1 </radius>
+						<length> 0.04 </length>
+					</cylinder>
+				</geometry>
+			</collision>
+		</link>
+
+		<link name="x_wheel_rl">
+			<pose> -0.35 0.5 0.1 0 0 0 </pose>
+			<visual name="left_wheel_visual">
+				<pose> 0 0 0 1.5707 0 0 </pose>
+				<geometry>
+					<cylinder>
+						<radius> 0.1 </radius>
+						<length> 0.04 </length>
+					</cylinder>
+				</geometry>
+			</visual>
+			<collision name="left_wheel_collision">
+				<pose> 0 0 0 1.5707 0 0 </pose>
+				<geometry>
+					<cylinder>
+						<radius> 0.1 </radius>
+						<length> 0.04 </length>
+					</cylinder>
+				</geometry>
+			</collision>
+		</link>
+
+		<link name="x_wheel_rr">
+			<pose> -0.35 -0.5 0.1 0 0 0 </pose>
+			<visual name="right_wheel_visual">
+				<pose> 0 0 0 1.5707 0 0 </pose>
+				<geometry>
+					<cylinder>
+						<radius> 0.1 </radius>
+						<length> 0.04 </length>
+					</cylinder>
+				</geometry>
+			</visual>
+			<collision name="right_wheel_collision">
+				<pose> 0 0 0 1.5707 0 0 </pose>
+				<geometry>
+					<cylinder>
+						<radius> 0.1 </radius>
+						<length> 0.04 </length>
+					</cylinder>
+				</geometry>
+			</collision>
+		</link>
+
+		<joint name="x_axis_drive_fl" type="revolute">
+			<parent> x_axis_frame </parent>
+			<child> x_wheel_fl </child>
+			<axis>
+				<xyz> 0 1 0 </xyz>
+			</axis>
+		</joint>
+
+		<joint name="x_axis_drive_fr" type="revolute">
+			<parent> x_axis_frame </parent>
+			<child> x_wheel_fr </child>
+			<axis>
+				<xyz> 0 1 0 </xyz>
+			</axis>
+		</joint>
+
+		<joint name="x_axis_drive_rl" type="revolute">
+			<parent> x_axis_frame </parent>
+			<child> x_wheel_rl </child>
+			<axis>
+				<xyz> 0 1 0 </xyz>
+			</axis>
+		</joint>
+
+		<joint name="x_axis_drive_rr" type="revolute">
+			<parent> x_axis_frame </parent>
+			<child> x_wheel_rr </child>
+			<axis>
+				<xyz> 0 1 0 </xyz>
+			</axis>
+		</joint>
+
+		<link name="y_axis_frame">
+			<pose> 0 0 0.1 0 0 0 </pose>
+			<visual name="y_beam_left_visual">
+				<pose> -0.47 0 0 0 0 0 </pose>
+				<geometry>
+					<box>
+						<size> 0.02 0.72 0.06 </size>
+					</box>
+				</geometry>
+			</visual>
+			<visual name="y_beam_right_visual">
+				<pose> 0.47 0 0 0 0 </pose>
+				<geometry>
+					<box>
+						<size> 0.02 0.72 0.06 </size>
+					</box>
+				</geometry>
+			</visual>
+
+			<collision name="y_beam_left_collision">
+				<pose> -0.47 0 0 0 0 0 </pose>
+				<geometry>
+					<box>
+						<size> 0.02 0.72 0.06 </size>
+					</box>
+				</geometry>
+			</collision>
+			<collision name="y_beam_right_collision">
+				<pose> 0.47 0 0 0 0 0 </pose>
+				<geometry>
+					<box>
+						<size> 0.02 0.72 0.06 </size>
+					</box>
+				</geometry>
+			</collision>
+		</link>
+
+		<joint name="y_axis_lift" type="prismatic">
+			<parent> main_frame </parent>
+			<child> y_axis_frame </child>
+			<axis>
+				<xyz> 0 0 1 </xyz>
+				<dynamics>
+					<damping> 100 </damping>
+					<friction> 200 </friction>
+				</dynamics>
+				<limit>
+					<upper> 0.6 </upper>
+					<lower> 0.0 </lower>
+				</limit>
+			</axis>
+		</joint>
+ 
+		<link name="y_wheel_fl">
+			<pose> -0.5 0.35 0.1 0 0 0 </pose>
+			<visual name="left_wheel_visual">
+				<pose> 0 0 0 0 1.5707 0 </pose>
+				<geometry>
+					<cylinder>
+						<radius> 0.1 </radius>
+						<length> 0.04 </length>
+					</cylinder>
+				</geometry>
+			</visual>
+			<collision name="left_wheel_collision">
+				<pose> 0 0 0 0 1.5707 0 </pose>
+				<geometry>
+					<cylinder>
+						<radius> 0.1 </radius>
+						<length> 0.04 </length>
+					</cylinder>
+				</geometry>
+			</collision>
+		</link>
+
+		<link name="y_wheel_fr">
+			<pose> 0.5 0.35 0.1 0 0 0 </pose>
+			<visual name="right_wheel_visual">
+				<pose> 0 0 0 0 1.5707 0 </pose>
+				<geometry>
+					<cylinder>
+						<radius> 0.1 </radius>
+						<length> 0.04 </length>
+					</cylinder>
+				</geometry>
+			</visual>
+			<collision name="right_wheel_collision">
+				<pose> 0 0 0 0 1.5707 0 </pose>
+				<geometry>
+					<cylinder>
+						<radius> 0.1 </radius>
+						<length> 0.04 </length>
+					</cylinder>
+				</geometry>
+			</collision>
+		</link>
+
+		<link name="y_wheel_rl">
+			<pose> -0.5 -0.35 0.1 0 0 0 </pose>
+			<visual name="left_wheel_visual">
+				<pose> 0 0 0 0 1.5707 0 </pose>
+				<geometry>
+					<cylinder>
+						<radius> 0.1 </radius>
+						<length> 0.04 </length>
+					</cylinder>
+				</geometry>
+			</visual>
+			<collision name="left_wheel_collision">
+				<pose> 0 0 0 0 1.5707 0 </pose>
+				<geometry>
+					<cylinder>
+						<radius> 0.1 </radius>
+						<length> 0.04 </length>
+					</cylinder>
+				</geometry>
+			</collision>
+		</link>
+
+		<link name="y_wheel_rr">
+			<pose> 0.5 -0.35 0.1 0 0 0 </pose>
+			<visual name="right_wheel_visual">
+				<pose> 0 0 0 0 1.5707 0 </pose>
+				<geometry>
+					<cylinder>
+						<radius> 0.1 </radius>
+						<length> 0.04 </length>
+					</cylinder>
+				</geometry>
+			</visual>
+			<collision name="right_wheel_collision">
+				<pose> 0 0 0 0 1.5707 0 </pose>
+				<geometry>
+					<cylinder>
+						<radius> 0.1 </radius>
+						<length> 0.04 </length>
+					</cylinder>
+				</geometry>
+			</collision>
+		</link>
+
+		<joint name="y_axis_drive_fl" type="revolute">
+			<parent> y_axis_frame </parent>
+			<child> y_wheel_fl </child>
+			<axis>
+				<xyz> -1 0 0 </xyz>
+			</axis>
+		</joint>
+
+		<joint name="y_axis_drive_fr" type="revolute">
+			<parent> y_axis_frame </parent>
+			<child> y_wheel_fr </child>
+			<axis>
+				<xyz> -1 0 0 </xyz>
+			</axis>
+		</joint>
+
+		<joint name="y_axis_drive_rl" type="revolute">
+			<parent> y_axis_frame </parent>
+			<child> y_wheel_rl </child>
+			<axis>
+				<xyz> -1 0 0 </xyz>
+			</axis>
+		</joint>
+
+		<joint name="y_axis_drive_rr" type="revolute">
+			<parent> y_axis_frame </parent>
+			<child> y_wheel_rr </child>
+			<axis>
+				<xyz> -1 0 0 </xyz>
+			</axis>
+		</joint>
+
+		<plugin name="joint_control" filename="libgazebo_ros_joint_pose_trajectory.so">
+			<ros>
+				<argument>set_joint_trajectory:=command_pose</argument>
+			</ros>
+			<update_rate>10</update_rate>
+		</plugin>
+
+		<plugin name="x_drive" filename="libgazebo_ros_diff_drive.so">
+			<ros>
+				<argument>cmd_vel:=command_x</argument>
+				<argument>odom:=odometry</argument>
+			</ros>
+
+			<num_wheel_pairs>2</num_wheel_pairs>
+
+			<left_joint>x_axis_drive_fl</left_joint>
+			<right_joint>x_axis_drive_fr</right_joint>
+			<left_joint>x_axis_drive_rl</left_joint>
+			<right_joint>x_axis_drive_rr</right_joint>
+
+			<wheel_separation>1.0</wheel_separation>
+			<wheel_separation>1.0</wheel_separation>
+
+			<wheel_diameter>0.1</wheel_diameter>
+			<wheel_diameter>0.1</wheel_diameter>
+
+			<max_wheel_torque>20</max_wheel_torque>
+			<max_wheel_acceleration>1.0</max_wheel_acceleration>
+
+			<publish_odom>true</publish_odom>
+			<publish_odom_tf>true</publish_odom_tf>
+			<publish_wheel_tf>true</publish_wheel_tf>
+
+			<odometry_frame>odom_demo</odometry_frame>
+			<robot_base_frame>main_frame</robot_base_frame>
+		</plugin>
+
+		<plugin name="y_drive" filename="libgazebo_ros_diff_drive.so">
+			<ros>
+				<argument>cmd_vel:=command_y</argument>
+			</ros>
+
+			<num_wheel_pairs>2</num_wheel_pairs>
+
+			<left_joint>y_axis_drive_fl</left_joint>
+			<right_joint>y_axis_drive_fr</right_joint>
+			<left_joint>y_axis_drive_rl</left_joint>
+			<right_joint>y_axis_drive_rr</right_joint>
+
+			<wheel_separation>1.0</wheel_separation>
+			<wheel_separation>1.0</wheel_separation>
+
+			<wheel_diameter>0.1</wheel_diameter>
+			<wheel_diameter>0.1</wheel_diameter>
+
+			<max_wheel_torque>20</max_wheel_torque>
+			<max_wheel_acceleration>1.0</max_wheel_acceleration>
+
+			<publish_odom>false</publish_odom>
+			<publish_odom_tf>false</publish_odom_tf>
+			<publish_wheel_tf>true</publish_wheel_tf>
+
+			<odometry_frame>odom_demo</odometry_frame>
+			<robot_base_frame>main_frame</robot_base_frame>
+		</plugin>
+
+	</model>
+</sdf>

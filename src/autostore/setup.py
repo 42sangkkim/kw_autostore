@@ -40,7 +40,8 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-          'spawn_demo = autostore.spawn_demo:main'
+          'spawn_demo = autostore.spawn_demo:main',
+		  'controller = autostore.controller:main',
         ],
     },
 )

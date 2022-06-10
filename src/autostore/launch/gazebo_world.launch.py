@@ -46,7 +46,7 @@ def generate_launch_description():
     #                    arguments=['-entity', 'demo', 'x', 'y', 'z'],
     #                    output='screen')
     spawn_entity = Node(package='autostore', executable='spawn_demo',
-                        arguments=['blackline', 'robot', '0.0', '0.0', '0.5'],
+                        arguments=['blackline', 'blackline_1', '0.0', '0.0', '0.5'],
                         output='screen')
 
     return LaunchDescription([

@@ -25,7 +25,7 @@
 		</link>
 
 		<link name="frame_pole">
-			<pose> 0 0 0.47 </pose>
+			<pose> 0 0 0.53 </pose>
 			<visual name="visual">
 				<geometry>
 					<cylinder>
@@ -45,7 +45,7 @@
 		</link>
 
 		<link name="frame_bot">
-			<pose> 0 0 0.1 </pose>
+			<pose> 0 0 0.16 </pose>
 			<visual name="visual">
 				<geometry>
 					<box>
@@ -99,47 +99,56 @@
 		</link>
 
 		<link name="frame_front">
-			<pose> 0 0.47 0.47 </pose>
+			<pose> 0 0.47 0.49 </pose>
 			<visual name="visual">
 				<geometry>
 					<box>
-						<size> 0.92 0.02 0.64 </size>
+						<size> 0.92 0.02 0.6 </size>
 					</box>
 				</geometry>
 			</visual>
 			<collision name="collision">
 				<geometry>
 					<box>
-						<size> 0.92 0.02 0.64 </size>
+						<size> 0.92 0.02 0.6 </size>
 					</box>
 				</geometry>
 			</collision>
 		</link>
 
 		<link name="frame_rear">
-			<pose> 0 -0.47 0.47 </pose>
+			<pose> 0 -0.47 0.49 </pose>
 			<visual name="visual">
 				<geometry>
 					<box>
-						<size> 0.92 0.02 0.64 </size>
+						<size> 0.92 0.02 0.6 </size>
 					</box>
 				</geometry>
 			</visual>
 			<collision name="collision">
 				<geometry>
 					<box>
-						<size> 0.92 0.02 0.64 </size>
+						<size> 0.92 0.02 0.6 </size>
 					</box>
 				</geometry>
 			</collision>
 		</link>
 
 <!-- joint frame -->
+
 		<joint name="frame_lift" type="prismatic">
 			<parent>frame_top</parent>
 			<child>frame_pole</child>
 			<axis>
 				<xyz> 0 0 1 </xyz>
+				<dynamics>
+					<friction> 2000 </friction>
+					<damping> 1000 </damping>
+				</dynamics>
+				<limit>
+					<upper> 0.0 </upper>
+					<lower> -0.12 </lower>
+				</limit>
 			</axis>
 		</joint>
 
@@ -170,7 +179,7 @@
 
 <!-- link wheel x -->
 		<link name="wheel_x_lf">
-			<pose> 0.35 0.5 0.1 1.5707 0 0 </pose>
+			<pose> 0.35 0.5 0.16 1.5707 0 0 </pose>
 			<visual name="visual">
 				<geometry>
 					<cylinder>
@@ -190,7 +199,7 @@
 		</link>
 
 		<link name="wheel_x_lr">
-			<pose> -0.35 0.5 0.1 1.5707 0 0 </pose>
+			<pose> -0.35 0.5 0.16 1.5707 0 0 </pose>
 			<visual name="visual">
 				<geometry>
 					<cylinder>
@@ -210,7 +219,7 @@
 		</link>
 
 		<link name="wheel_x_rf">
-			<pose> 0.35 -0.5 0.1 1.5707 0 0 </pose>
+			<pose> 0.35 -0.5 0.16 1.5707 0 0 </pose>
 			<visual name="visual">
 				<geometry>
 					<cylinder>
@@ -230,7 +239,7 @@
 		</link>
 
 		<link name="wheel_x_rr">
-			<pose> -0.35 -0.5 0.1 1.5707 0 0 </pose>
+			<pose> -0.35 -0.5 0.16 1.5707 0 0 </pose>
 			<visual name="visual">
 				<geometry>
 					<cylinder>
@@ -400,45 +409,40 @@
 
 <!-- plugin -->
 
-		<!-- <plugin name="planar_move" filename="libgazebo_ros_planar_move.so">
+		<plugin name="planar_control" filename="libgazebo_ros_planar_move.so">
 			<ros>
-				<namespace>/blackline</namespace>
-				<argument>cmd_vel:=command</argument>
-				<argument>odom:=odometry</argument>
+				<namespace>/demo</namespace>
+				<argument>cmd_vel:=cmd_vel</argument>
+				<argument>odom:=odom</argument>
 			</ros>
 
-			<update_rate> 100 </update_rate>
-			<publish_rate> 10 </publish_rate>
+			<update_rate>100</update_rate>
+			<publish_rate>10</publish_rate>
 
-			<publish_odom> true </publish_odom>
-			<publish_odom_tf> true </publish_odom_tf>
+			<!-- output -->
+			<publish_odom>true</publish_odom>
+			<publish_odom_tf>true</publish_odom_tf>
 
 			<odometry_frame>odom_demo</odometry_frame>
-			<robot_base_frame>frame_top</robot_base_frame>
+			<robot_base_frame>naim_frame</robot_base_frame>
 
 			<covariance_x>0.0001</covariance_x>
 			<covariance_y>0.0001</covariance_y>
-			<convarience_yaw>0.01</convarience_yaw>
-		</plugin> -->
+			<covariance_yaw>0.01</covariance_yaw>
+		</plugin>
 
 		<!-- <plugin name="lift_control" filename="libgazebo_ros_joint_pose_trajectory.so">
 			<ros>
-				<namespace>/demo</namespace>
-				<argument>set_joint_trajectory:=lift_control</argument>
+				<argument>set_joint_trajectory:=joint_control</argument>
 			</ros>
 			<update_rate>100</update_rate>
 		</plugin> -->
 
-		<!-- <plugin filename="libgazebo_ros2_control.so" name="gazebo_ros2_control">
-			<robot_sim_type>gazebo_ros2_control/GazeboSystem</robot_sim_type>
-			<parameters>/home/sangkkim/AutoStore/src/Autostore/config/joint_trajectory_p_controller.yaml</parameters>
-		</plugin> -->
-
-		<plugin name='drive_plugin_x' filename='libgazebo_ros_diff_drive.so'>
+		<!-- <plugin name='drive_plugin_x' filename='libgazebo_ros_diff_drive.so'>
 			<ros>
 				<namespace>/blackline</namespace>
-				<argument>cmd_vel:=cmd_x</argument>
-				<argument>odom:=odom_x</argument>
+				<argument>cmd_vel:=wheel_control_x</argument>
+				<argument>odom:=odometry</argument>
 			</ros>
 
 			<num_wheel_pairs>2</num_wheel_pairs>
@@ -463,13 +467,11 @@
 
 			<odometry_frame>odom_demo</odometry_frame>
 			<robot_base_frame>frame_top</robot_base_frame>
-		</plugin>
+		</plugin> -->
 
-		<plugin name='drive_plugin_y' filename='libgazebo_ros_diff_drive.so'>
+		<!-- <plugin name='drive_plugin_y' filename='libgazebo_ros_diff_drive.so'>
 			<ros>
-				<namespace>/blackline</namespace>
-				<argument>cmd_vel:=cmd_y</argument>
-				<argument>odom:=odom_y</argument>
+				<argument>cmd_vel:=wheel_control_y</argument>
 			</ros>
 
 			<num_wheel_pairs>2</num_wheel_pairs>
@@ -488,13 +490,13 @@
 			<max_wheel_torque>20</max_wheel_torque>
 			<max_wheel_acceleration>1.0</max_wheel_acceleration>
 
-			<publish_odom>true</publish_odom>
-			<publish_odom_tf>true</publish_odom_tf>
+			<publish_odom>false</publish_odom>
+			<publish_odom_tf>false</publish_odom_tf>
 			<publish_wheel_tf>true</publish_wheel_tf>
 
 			<odometry_frame>odom_demo</odometry_frame>
 			<robot_base_frame>frame_top</robot_base_frame>
-		</plugin>
+		</plugin> -->
 
 <!-- end of file -->
 	</model>

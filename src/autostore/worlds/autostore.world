@@ -85,7 +85,7 @@
     </gui>
     <!-- A simple warehouse -->
     <include>
-      <uri>model://Autostore_Grid</uri>
+      <uri>model://Autostore_grid</uri>
       <pose>0 0 0 0 0 0</pose>
     </include>
   </world>
